@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'corsheaders',
+    'courses',
+    'coreapi',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +44,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,14 +75,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'knowbuddy.wsgi.application'
 
+# CORS WHITE LIST
+CORS_ALLOWED_ORIGINS = []
+
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
+
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': BASE_DIR / 'db.knowbuddy',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'know',
+        'USER': 'admin',
+        'PASSWORD': 'example',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
